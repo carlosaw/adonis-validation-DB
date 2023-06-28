@@ -12,3 +12,4 @@ Route.post('/enum/validateEnum', 'EnumsController.validateEnum');
 Route.post('/number/validateNumber', 'NumbersController.validateNumber');
 Route.post('/boolean/validateBoolean', 'BooleansController.validateBoolean');
 Route.post('/date/validateDate', 'DatesController.validateDates');
+Route.post('/object/validateObject', 'ObjectsController.validateObject');
