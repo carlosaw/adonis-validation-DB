@@ -14,8 +14,14 @@ export default class ObjectsController {
       }),
       
       address: schema.object().members({
-        city: schema.string(),
-        state: schema.string()
+        //state: schema.object().anyMembers()
+        //state: schema.object.nullable().anyMembers()
+        state: schema.object().members({
+          name: schema.string(),
+          city: schema.object().members({
+            "name": schema.string()
+          })
+        }),  
       }),
       status: schema.string()
     });
@@ -25,6 +31,24 @@ export default class ObjectsController {
     })
 
     return {response: 'success'}
+  }
+
+  public async showObjectRequest(ctx: HttpContextContract) {
+    // Desestruturando ctx para pegar o ctx.request().
+    let {request} = ctx;
+
+    // Criando o Schema de validação
+    let schemaObject = schema.create ({
+      user: schema.object().members({
+        name: schema.string(),
+        id: schema.number()
+      }),
+    });
+    const validated = await request.validate({
+      schema: schemaObject
+    })
+
+    return validated;
   }
 
 }
